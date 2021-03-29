@@ -81,6 +81,3 @@ test:
 #
 production:
   <<: *default
-  database: evolution_production
-  username: evolution
-  password: <%= ENV['EVOLUTION_DATABASE_PASSWORD'] %>
