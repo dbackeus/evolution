@@ -5,8 +5,8 @@
 <h2>Lines of code per repo</h2>
 
 <ul>
-  <% @repos_loc.each do |repo_loc| %>
-  <li><%= repo_loc.repo %> <%= repo_loc.loc %></li>
+  <% @repos_loc.each do |repo, loc| %>
+  <li><%= repo %> <%= loc %></li>
   <% end %>
 </ul>
 
