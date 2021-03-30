@@ -1,0 +1,3 @@
+class CodeFile < ClickhouseRecord
+
+end

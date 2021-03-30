@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/bdevel/clickhouse-activerecord
+  revision: 6defa267aa0c9ed233db0f60c5187a70d2453d40
+  branch: rails-6.1-support
+  specs:
+    clickhouse-activerecord (0.4.11)
+      activerecord (>= 5.2)
+      bundler (>= 1.13.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -148,6 +157,7 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    simdjson (1.0.1)
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -182,6 +192,7 @@ DEPENDENCIES
   bootsnap
   byebug
   capybara
+  clickhouse-activerecord!
   listen
   pg
   puma
@@ -189,6 +200,7 @@ DEPENDENCIES
   rails
   redis
   selenium-webdriver
+  simdjson
   spring
   web-console
   webdrivers

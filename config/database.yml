@@ -21,9 +21,18 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+clickhouse_default: &clickhouse_default
+  adapter: clickhouse
+  migrations_paths: db/clickhouse_migrate
+
 development:
-  <<: *default
-  database: evolution_development
+  primary:
+    <<: *default
+    database: evolution_development
+  clickhouse:
+    <<: *clickhouse_default
+    database: evolution_development
+    #password: asdf
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -56,8 +65,12 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: evolution_test
+  primary:
+    <<: *default
+    database: evolution_test
+  clickhouse:
+    <<: *clickhouse_default
+    database: evolution_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

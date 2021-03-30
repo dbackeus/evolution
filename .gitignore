@@ -4,6 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Temporary folder for files to ingest into clickhouse
+/tokei
+
 # Ignore bundler config.
 /.bundle
 
