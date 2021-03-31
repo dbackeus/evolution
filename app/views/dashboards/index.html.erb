@@ -5,7 +5,7 @@
 <h2>Lines of code per repo</h2>
 
 <ul>
-  <% @repos_loc.each do |repo, loc| %>
+  <% @repos_current_loc.each do |repo, loc| %>
   <li><%= repo %> <%= loc %></li>
   <% end %>
 </ul>
@@ -13,23 +13,10 @@
 <canvas id="chart"></canvas>
 
 <script>
-  // var tokeiDump =
-
-  // var ctx = document.getElementById('chart').getContext('2d');
-  // var chart = new Chart(ctx, {
-  //   type: 'line',
-  //   data: {
-  //       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  //       datasets: [{
-  //           label: 'Ruby',
-  //           data: [0, 10, 5, 2, 20, 30, 45]
-  //       },
-  //       {
-  //           label: 'JavaScript',
-  //           data: [10, 12, 14,17, 20, 16, 47]
-  //       }
-  //       ]
-  //   },
-  //   options: {}
-  // })
+  var ctx = document.getElementById('chart').getContext('2d');
+  var chart = new Chart(ctx, {
+    type: 'line',
+    data: <%=raw chart_data(@repos_monthly_loc) %>,
+    options: {}
+  })
 </script>
