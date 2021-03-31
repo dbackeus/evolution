@@ -10,13 +10,17 @@
   <% end %>
 </ul>
 
+<p>
+  Frequency: <%= @frequency %>
+</p>
+
 <h2>Lines of code: Implementation</h2>
 <canvas id="chart-implementation"></canvas>
 <script>
   var ctx = document.getElementById('chart-implementation').getContext('2d')
   var chart = new Chart(ctx, {
     type: 'line',
-    data: <%=raw chart_data(@repos_interval_implementation) %>,
+    data: <%=raw chart_data(@repos_interval_implementation, @frequency) %>,
     options: {}
   })
 </script>
@@ -27,7 +31,7 @@
   var ctx = document.getElementById('chart-total').getContext('2d')
   var chart = new Chart(ctx, {
     type: 'line',
-    data: <%=raw chart_data(@repos_interval_total) %>,
+    data: <%=raw chart_data(@repos_interval_total, @frequency) %>,
     options: {}
   })
 </script>

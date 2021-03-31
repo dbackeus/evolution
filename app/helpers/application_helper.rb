@@ -11,7 +11,7 @@ module ApplicationHelper
   ].freeze
 
   # { ["mynewsdesk", "2006-02-01"] => 8056, ["mynewsdesk", "2006-03-01"] => 37809, ... }
-  def chart_data(repo_and_date_with_sum)
+  def chart_data(repo_and_date_with_sum, frequency)
     start_date = repo_and_date_with_sum.keys.first.second
     end_date = repo_and_date_with_sum.keys.last.second
 
@@ -22,12 +22,12 @@ module ApplicationHelper
     end
 
     # ["2006-02-01", "2006-03-01", ...]
-    range_of_months = monthly_range(start_date, end_date)
+    range = range(start_date, end_date, frequency)
 
     # Fill blanks for dates where the repo is missing data
     repos_dates_locs.each do |repo, dates_with_loc|
       last_loc = 0
-      range_of_months.each do |date|
+      range.each do |date|
         if loc = dates_with_loc[date]
           last_loc = loc
         else
@@ -45,23 +45,24 @@ module ApplicationHelper
     #   ]
     # }
     {
-      labels: range_of_months,
+      labels: range,
       datasets: to_datasets(repos_dates_locs),
     }.to_json
   end
 
   private
 
-  def monthly_range(start_date, end_date)
+  def range(start_date, end_date, frequency)
     start_date = Date.parse(start_date)
     end_date = Date.parse(end_date)
-    current_month = start_date
+    current_date = start_date
 
     range = []
 
-    while current_month <= end_date
-      range << current_month.to_s
-      current_month = current_month.next_month
+    until current_date == end_date
+      range << current_date.to_s
+      current_date = current_date.send("next_#{frequency}") # ie. Date#(next_day|next_week|next_month)
+      current_date = end_date if current_date > end_date
     end
 
     range
