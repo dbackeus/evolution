@@ -26,8 +26,17 @@ class DashboardsController < ApplicationController
       "repo = '#{repo}' AND date IN (#{dates})"
     end.join(" OR ")
 
-    @repos_monthly_loc = CodeFile
+    @repos_interval_total = CodeFile
       .where(monthly_predicate)
+      .group(:repo, "date_trunc('month', date)")
+      .order(:date_trunc_month_date)
+      .sum(:code)
+
+    @repos_interval_implementation = CodeFile
+      .where(monthly_predicate)
+      .where("match(path, '^\./(app|lib|client|src)/')")
+      .where.not("match(path, '\.spec\..{2,3}$')")
+      .where.not("match(path, '^\./src/(__mocks__|vendor|testUtils|generated)')")
       .group(:repo, "date_trunc('month', date)")
       .order(:date_trunc_month_date)
       .sum(:code)

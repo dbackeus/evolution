@@ -10,13 +10,24 @@
   <% end %>
 </ul>
 
-<canvas id="chart"></canvas>
-
+<h2>Lines of code: Implementation</h2>
+<canvas id="chart-implementation"></canvas>
 <script>
-  var ctx = document.getElementById('chart').getContext('2d');
+  var ctx = document.getElementById('chart-implementation').getContext('2d')
   var chart = new Chart(ctx, {
     type: 'line',
-    data: <%=raw chart_data(@repos_monthly_loc) %>,
+    data: <%=raw chart_data(@repos_interval_implementation) %>,
+    options: {}
+  })
+</script>
+
+<h2>Lines of code: Total</h2>
+<canvas id="chart-total"></canvas>
+<script>
+  var ctx = document.getElementById('chart-total').getContext('2d')
+  var chart = new Chart(ctx, {
+    type: 'line',
+    data: <%=raw chart_data(@repos_interval_total) %>,
     options: {}
   })
 </script>
