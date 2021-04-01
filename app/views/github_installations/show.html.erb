@@ -1,7 +1,10 @@
 <h1><%= @github_installation.name %></h1>
 
 <ul>
-  <% @repositories.each do |repository| %>
-    <li><%= repository.fetch("name") %></li>
+  <% @available_repositories.each do |repository| %>
+    <li>
+      <%= repository.fetch("name") %>
+      <%= button_to "Import", repositories_path(github_installation_id: @github_installation.id, github_repository_id: repository.fetch("id")), method: :post %>
+    </li>
   <% end %>
 </ul>

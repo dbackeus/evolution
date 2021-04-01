@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_083357) do
+ActiveRecord::Schema.define(version: 2021_04_01_120254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,5 +31,19 @@ ActiveRecord::Schema.define(version: 2021_04_01_083357) do
     t.index ["installation_id"], name: "index_github_installations_on_installation_id", unique: true
   end
 
+  create_table "repositories", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "github_installation_id", null: false
+    t.string "name", null: false
+    t.bigint "github_repository_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_repositories_on_account_id"
+    t.index ["github_installation_id"], name: "index_repositories_on_github_installation_id"
+  end
+
   add_foreign_key "github_installations", "accounts"
+  add_foreign_key "repositories", "accounts"
+  add_foreign_key "repositories", "github_installations"
 end

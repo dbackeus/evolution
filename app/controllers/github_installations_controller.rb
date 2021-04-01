@@ -5,7 +5,7 @@ class GithubInstallationsController < ApplicationController
 
   def show
     @github_installation = current_account.github_installations.find(params[:id])
-    @repositories = Github.as_installation(@github_installation).repositories
+    @available_repositories = Github.as_installation(@github_installation).repositories
   end
 
   # GET github_installations/callback?installation_id=15882248&setup_action=install
