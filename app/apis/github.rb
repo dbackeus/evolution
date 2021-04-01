@@ -35,7 +35,9 @@ class Github
 
   def self.as_installation(github_installation)
     # https://docs.github.com/en/developers/apps/authenticating-with-github-apps#authenticating-as-an-installation
-    token = as_app.post("app/installations/#{github_installation.installation_id}/access_tokens").fetch("token")
+    token = Rails.cache.fetch("github-installation-token-#{github_installation.id}", expires_in: 50.minutes) do
+      as_app.post("app/installations/#{github_installation.installation_id}/access_tokens").fetch("token")
+    end
     new(token)
   end
 
