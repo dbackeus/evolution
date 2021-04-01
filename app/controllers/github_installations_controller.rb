@@ -1,4 +1,8 @@
 class GithubInstallationsController < ApplicationController
+  def index
+    @github_installations = current_account.github_installations
+  end
+
   def show
     @github_installation = current_account.github_installations.find(params[:id])
     @repositories = Github.as_installation(@github_installation).repositories
