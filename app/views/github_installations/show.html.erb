@@ -1,0 +1,7 @@
+<h1>Repositories</h1>
+
+<ul>
+  <% @repositories.each do |repository| %>
+    <li><%= repository.fetch("name") %></li>
+  <% end %>
+</ul>
