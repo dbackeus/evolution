@@ -7,6 +7,10 @@
 # Temporary folder for files to ingest into clickhouse
 /tokei
 
+# Dotenv
+.env.local
+.env.development.local
+
 # Ignore bundler config.
 /.bundle
 

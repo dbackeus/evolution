@@ -4,11 +4,14 @@ ruby "2.7.2"
 
 gem "bootsnap", require: false
 gem "clickhouse-activerecord", git: "https://github.com/bdevel/clickhouse-activerecord", branch: "rails-6.1-support"
+gem "dotenv-rails"
+gem "jwt"
 gem "pg"
 gem "puma"
 gem "rails"
 gem "redis"
 gem "simdjson"
+gem "typhoeus"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
