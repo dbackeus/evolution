@@ -10,6 +10,7 @@ gem "pg"
 gem "puma"
 gem "rails"
 gem "redis"
+gem "sidekiq"
 gem "simdjson"
 gem "typhoeus"
 
