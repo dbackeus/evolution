@@ -16,6 +16,8 @@ class Github
 
   HttpError = Class.new(StandardError)
 
+  attr_reader :token
+
   def self.private_key
     @private_key ||= OpenSSL::PKey::RSA.new ENV.fetch("GITHUB_APP_PRIVATE_KEY")
   end

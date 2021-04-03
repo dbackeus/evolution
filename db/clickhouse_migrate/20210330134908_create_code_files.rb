@@ -1,7 +1,8 @@
 class CreateCodeFiles < ActiveRecord::Migration[6.1]
   def change
-    create_table :code_files, id: false, options: "MergeTree() ORDER BY (date, repo)" do |t|
-      t.string :repo, null: false
+    create_table :code_files, id: false, options: "MergeTree() ORDER BY (account_id, date, repository_id)" do |t|
+      t.bigint :account_id, null: false
+      t.bigint :repository_id, null: false
       t.date :date, null: false
       t.string :path, null: false
       t.string :language, null: false

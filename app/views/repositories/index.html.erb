@@ -1,0 +1,9 @@
+<h1>Indexed Repositories</h1>
+
+<ul>
+  <% @repositories.each do |repository| %>
+    <li><%= link_to repository.name, repository %> - <%= repository.status %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Import another repository", github_installations_path %>
