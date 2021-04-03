@@ -5,6 +5,7 @@ class GithubInstallationsController < ApplicationController
 
   def show
     @github_installation = current_account.github_installations.find(params[:id])
+    @existing_repository_ids = current_account.repositories.pluck(:github_repository_id)
     @available_repositories = Github.as_installation(@github_installation).repositories
   end
 
