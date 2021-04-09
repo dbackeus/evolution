@@ -17,9 +17,9 @@ module ApplicationHelper
 
     # { "mynewsdesk" => { "2006-02-01" => 8056 , "2006-03-01" => 37809, ... }, "mnd-publish-frontend" => { "2017-05-01" => 21153, ... }, ... }
     repos_dates_locs = {}
-    repo_and_date_with_sum.each do |(repository_id, date), loc|
-      repo_name = current_account.repositories.find(repository_id).name # TODO: Remove the N+1
-      repos_dates_locs.deep_merge! repo_name => { date => loc }
+    repo_and_date_with_sum.each do |(label, date), loc|
+      label = current_account.repositories.find(label).name if label.is_a?(Integer) # TODO: Remove the N+1
+      repos_dates_locs.deep_merge! label => { date => loc }
     end
 
     # ["2006-02-01", "2006-03-01", ...]
@@ -80,7 +80,7 @@ module ApplicationHelper
   def to_datasets(repos_dates_locs)
     datasets = []
     repos_dates_locs.each_with_index do |(repo, dates_with_loc), index|
-      color = COLORS[index]
+      color = COLORS[index % COLORS.length]
       datasets << {
         label: repo,
         data: dates_with_loc.sort.map(&:second),

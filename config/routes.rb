@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
   resource :session, only: %i[create destroy]
+
+  resources :charts
   resources :repositories
   resources :dashboards, only: :index
   resources :github_installations, only: %i[index show] do

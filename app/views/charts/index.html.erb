@@ -1,0 +1,9 @@
+<h1>Charts</h1>
+
+<ul>
+  <% @charts.each do |chart| %>
+    <li><%= link_to chart.name, edit_chart_path(chart) %></li>
+  <% end %>
+</ul>
+
+<%= link_to "New chart", new_chart_path %>

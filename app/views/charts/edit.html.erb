@@ -1,0 +1,20 @@
+<h1>Editing <%= @chart.name %></h1>
+
+<h2>Preview</h2>
+<iframe width="1100" height="600" src="<%= url_for(@chart) %>"></iframe>
+
+<%= form_for @chart do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :group_by, "Group By" %>
+  <%= f.select :group_by, { "Repositories" => "repository_id", "Language" => "language" } %>
+  <br>
+  <%= f.label :repository_names, "Repositories" %>
+  <%= f.select :repository_names, @repository_names, {}, multiple: true, size: @repository_names.length %>
+  <br>
+  <%= f.label :repositories, "Filters" %>
+  <%= f.text_area :filters, cols: 80, rows: 10 %>
+  <br>
+  <%= f.submit "Save", disable_with: 'Saving...' %>
+<% end %>
