@@ -32,6 +32,7 @@ class IngestTokeiDumpJob < ApplicationJob
     query_string = Rack::Utils.build_query(
       database: ApplicationRecord.configurations.configs_for(name: "clickhouse").database,
       query: "INSERT INTO code_files (* EXCEPT(created_at)) FORMAT TSV",
+      password: ENV["CLICKHOUSE_PASSWORD"],
     )
     response = ClickhouseRecord.connection.raw_connection.post("/?#{query_string}", tsv)
 
