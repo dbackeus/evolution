@@ -1,4 +1,6 @@
 class RepositoriesController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     @repository = current_account.repositories.find(params[:id])
 
