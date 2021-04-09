@@ -1,6 +1,4 @@
 class ImportRepositoryJob < ApplicationJob
-  SUCCESS = "💪".freeze
-
   queue_as :default
 
   def perform(repository_id)
@@ -22,7 +20,7 @@ class ImportRepositoryJob < ApplicationJob
     initial_commit_at = Time.at(`#{git_at_path} log --reverse --format=%ct | head -n 1`.to_i)
     repository.update!(initial_commit_at: initial_commit_at, status: "importing")
 
-    current_date = repository.repository_snapshots.minimum(:date)&.prev_day || Time.at(`git log -1 --format=%ct`.to_i).to_date
+    current_date = repository.repository_snapshots.minimum(:date)&.prev_day || Time.at(`#{git_at_path} log -1 --format=%ct`.to_i).to_date
     loop do
       last_commit = `#{git_at_path} rev-list -n 1 --before="#{current_date} 23:59:59" master`
       break if last_commit.empty? # we've gone past the initial commit
