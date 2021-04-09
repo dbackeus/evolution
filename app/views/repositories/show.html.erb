@@ -1,0 +1,26 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<h1><%= @repository.name %></h1>
+
+<p>Status: <%= @repository.status %></p>
+
+<% if @repository.status == "importing" %>
+  <p>Progress: <%= (import_progress(@repository) * 100).round %>%</p>
+<% end %>
+
+<% if @repository.status == "imported" %>
+  <p>LOC: <%= @current_loc %></p>
+
+  <h2>Lines of code: Language distribution</h2>
+  <canvas id="chart-implementation"></canvas>
+  <script>
+    var ctx = document.getElementById('chart-implementation').getContext('2d')
+    var chart = new Chart(ctx, {
+      type: 'line',
+      data: <%=raw chart_data(@language_distribution, @frequency) %>,
+      options: {}
+    })
+  </script>
+<% end %>
+
+<%= link_to "Back to repositories list", repositories_path %>

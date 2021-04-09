@@ -50,6 +50,14 @@ module ApplicationHelper
     }.to_json
   end
 
+  def import_progress(repository)
+    range = repository.initial_commit_at.to_date..Date.today
+    last_snapshot_on = repository.repository_snapshots.minimum(:date)
+    current_index = range.entries.index(last_snapshot_on)
+    dates_completed = range.count - current_index
+    dates_completed / range.count.to_f
+  end
+
   private
 
   def range(start_date, end_date, frequency)
