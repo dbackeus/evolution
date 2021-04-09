@@ -15,6 +15,7 @@ class ImportRepositoryJob < ApplicationJob
 
     system "git clone #{clone_url} #{clone_path}", exception: true
 
+    tokei = ENV["TOKEI_COMMAND"] || "tokei"
     git_at_path = "git -C #{clone_path}"
 
     initial_commit_at = Time.at(`#{git_at_path} log --reverse --format=%ct | head -n 1`.to_i)
@@ -28,7 +29,7 @@ class ImportRepositoryJob < ApplicationJob
       system "#{git_at_path} checkout #{last_commit}", exception: true
 
       current_commit_date = Time.at(`#{git_at_path} log -1 --format=%ct`.to_i).to_date
-      tokei_output = `tokei -e /vendor/ -e /tmp/ -e /node_modules/ --output json #{clone_path}`
+      tokei_output = `#{tokei} -e /vendor/ -e /tmp/ -e /node_modules/ --output json #{clone_path}`
 
       repository.repository_snapshots.create!(
         date: current_commit_date,
