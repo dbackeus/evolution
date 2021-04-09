@@ -90,4 +90,9 @@ module ApplicationHelper
     end
     datasets
   end
+
+  def url_for_github_app(app_name: ENV.fetch("GITHUB_APP_NAME"), callback_url:)
+    query = Rack::Utils.build_query(state: Base64.encode64(callback_url))
+    "https://github.com/apps/#{app_name}/installations/new?#{query}"
+  end
 end

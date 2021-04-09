@@ -7,11 +7,12 @@
     <%= csp_meta_tag %>
 
     <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/rails-ujs@5.2.5/lib/assets/compiled/rails-ujs.min.js" %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
 
   <body>
     <% if user_signed_in? %>
+      <br>
+      <%= link_to "Repositories", repositories_path %>
       <%= link_to "Sign out", session_path, method: "delete" %>
     <% end %>
     <%= yield %>
