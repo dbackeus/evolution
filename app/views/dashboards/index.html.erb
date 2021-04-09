@@ -5,8 +5,9 @@
 <h2>Lines of code per repo</h2>
 
 <ul>
-  <% @repos_current_loc.each do |repo, loc| %>
-  <li><%= repo %> <%= loc %></li>
+  <% @repos_current_loc.each do |repository_id, loc| %>
+    <%# TODO: remove N+1 %>
+    <li><%= current_account.repositories.find(repository_id).name %> <%= loc %></li>
   <% end %>
 </ul>
 

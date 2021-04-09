@@ -10,15 +10,16 @@ module ApplicationHelper
     #ffa600
   ].freeze
 
-  # { ["mynewsdesk", "2006-02-01"] => 8056, ["mynewsdesk", "2006-03-01"] => 37809, ... }
+  # { [repo_id, "2006-02-01"] => 8056, [repo_id, "2006-03-01"] => 37809, ... }
   def chart_data(repo_and_date_with_sum, frequency)
     start_date = repo_and_date_with_sum.keys.first.second
     end_date = repo_and_date_with_sum.keys.last.second
 
     # { "mynewsdesk" => { "2006-02-01" => 8056 , "2006-03-01" => 37809, ... }, "mnd-publish-frontend" => { "2017-05-01" => 21153, ... }, ... }
     repos_dates_locs = {}
-    repo_and_date_with_sum.each do |(repo, date), loc|
-      repos_dates_locs.deep_merge! repo => { date => loc }
+    repo_and_date_with_sum.each do |(repository_id, date), loc|
+      repo_name = current_account.repositories.find(repository_id).name # TODO: Remove the N+1
+      repos_dates_locs.deep_merge! repo_name => { date => loc }
     end
 
     # ["2006-02-01", "2006-03-01", ...]
