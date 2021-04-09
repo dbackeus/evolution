@@ -6,4 +6,4 @@
   <% end %>
 </ul>
 
-<%= link_to "Add another account", "https://github.com/apps/#{ENV.fetch('GITHUB_APP_NAME')}/installations/new?state=lol" %>
+<%= link_to "Add another account", url_for_github_app(callback_url: root_url) %>
