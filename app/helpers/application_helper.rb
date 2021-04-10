@@ -10,6 +10,41 @@ module ApplicationHelper
     #ffa600
   ].freeze
 
+  def highchart_series(repo_and_date_with_sum, frequency)
+    start_date = repo_and_date_with_sum.keys.first.second
+    end_date = repo_and_date_with_sum.keys.last.second
+
+    # { "mynewsdesk" => { "2006-02-01" => 8056 , "2006-03-01" => 37809, ... }, "mnd-publish-frontend" => { "2017-05-01" => 21153, ... }, ... }
+    repos_dates_locs = {}
+    repo_and_date_with_sum.each do |(label, date), loc|
+      label = current_account.repositories.find(label).name if label.is_a?(Integer) # TODO: Remove the N+1
+      repos_dates_locs.deep_merge! label => { date => loc }
+    end
+
+    # ["2006-02-01", "2006-03-01", ...]
+    range = range(start_date, end_date, frequency)
+
+    # Fill blanks for dates where the repo is missing data
+    repos_dates_locs.each do |repo, dates_with_loc|
+      last_loc = 0
+      range.each do |date|
+        if loc = dates_with_loc[date]
+          last_loc = loc
+        else
+          dates_with_loc[date] = last_loc
+        end
+      end
+    end
+
+    repos_dates_locs.map do |name, date_and_value|
+      {
+        type: "line",
+        name: name,
+        data: date_and_value.map { |date, value| [Time.parse(date).to_i * 1000, value] }.sort_by(&:first),
+      }
+    end.to_json
+  end
+
   # { [repo_id, "2006-02-01"] => 8056, [repo_id, "2006-03-01"] => 37809, ... }
   def chart_data(repo_and_date_with_sum, frequency)
     start_date = repo_and_date_with_sum.keys.first.second

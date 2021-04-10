@@ -1,4 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="/vendor/highcharts.min.js"></script>
 
 <h1><%= @repository.name %></h1>
 
@@ -12,13 +12,30 @@
   <p>LOC: <%= @current_loc %></p>
 
   <h2>Lines of code: Language distribution</h2>
-  <canvas id="chart-implementation"></canvas>
+  <div id="chart-implementation"></div>
   <script>
-    var ctx = document.getElementById('chart-implementation').getContext('2d')
-    var chart = new Chart(ctx, {
-      type: 'line',
-      data: <%=raw chart_data(@language_distribution, @frequency) %>,
-      options: {}
+    Highcharts.chart('chart-implementation', {
+      chart: {
+        zoomType: 'x'
+      },
+      title: {
+        text: null
+      },
+      subtitle: {
+        text: null
+      },
+      xAxis: {
+        type: 'datetime'
+      },
+      yAxis: {
+        title: {
+          text: 'Lines of code'
+        }
+      },
+      legend: {
+        enabled: true
+      },
+      series: <%=raw highchart_series(@language_distribution, @frequency) %>
     })
   </script>
 <% end %>

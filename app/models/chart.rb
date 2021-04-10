@@ -14,7 +14,7 @@ class Chart < ApplicationRecord
   def repository_names
     Repository
       .where(account_id: account_id)
-      .where(id: repositories.split(","))
+      .where(id: repositories.to_s.split(","))
       .pluck(:name)
   end
 end
