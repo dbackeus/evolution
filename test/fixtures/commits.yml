@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  repository: one
+  sha: MyString
+  title: MyString
+  files_changed: 1
+  insertions: 1
+  deletions: 1
+  net_diff: 1
+  commited_at: 2021-04-10 21:26:43
+
+two:
+  repository: two
+  sha: MyString
+  title: MyString
+  files_changed: 1
+  insertions: 1
+  deletions: 1
+  net_diff: 1
+  commited_at: 2021-04-10 21:26:43
