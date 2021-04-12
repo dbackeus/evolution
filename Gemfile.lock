@@ -118,6 +118,7 @@ GEM
     hashie (4.1.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    io-console (0.5.9)
     jwt (2.2.2)
     listen (3.5.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -206,6 +207,8 @@ GEM
       ffi (~> 1.0)
     redis (4.2.5)
     regexp_parser (2.1.1)
+    reline (0.2.5)
+      io-console (~> 0.5)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -269,6 +272,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails
   redis
+  reline
   selenium-webdriver
   sidekiq
   simdjson
