@@ -8,7 +8,9 @@ class RepositoriesController < ApplicationController
       latest_import = @repository.code_files.maximum(:date)
       @current_loc = @repository.code_files.where(date: latest_import).sum(:code)
 
-      @frequency = "day"
+      @significant_commits = Commit.most_significant(@repository.id)
+
+      @frequency = "month"
       @language_distribution = @repository
         .code_files
         .group(:language, "toDate(date_trunc('#{@frequency}', date))")

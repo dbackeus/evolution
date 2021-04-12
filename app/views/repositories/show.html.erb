@@ -1,4 +1,5 @@
 <script src="/vendor/highcharts.min.js"></script>
+<script src="/vendor/highcharts-more.min.js"></script>
 
 <h1><%= @repository.name %></h1>
 
@@ -10,6 +11,48 @@
 
 <% if @repository.status == "imported" %>
   <p>LOC: <%= @current_loc %></p>
+
+  <h2>Significant commits</h2>
+  <div id="chart-commits"></div>
+  <script>
+    Highcharts.chart('chart-commits', {
+      chart: { type: 'bubble', zoomType: 'x' },
+      title: { text: null },
+      xAxis: { type: 'datetime' },
+      yAxis: {
+        plotLines: [{
+          color: "#333333",
+          value: 0,
+        }]
+      },
+      plotOptions: {
+        series: {
+          dataLabels: {
+            enabled: true,
+            format: '{point.diff}'
+          },
+          events: {
+            click: (e) => { window.open('/commits/' + e.point.options.id, '_blank') }
+          }
+        }
+      },
+      tooltip: {
+        useHTML: true,
+        backgroundColor: "#FFFFFF",
+        headerFormat: '<table>',
+        pointFormat: '<tr><th><h3>{point.subject}</h3></th></tr>' +
+          '<tr><th>+{point.insertions}</td></tr>' +
+          '<tr><th>-{point.deletions}</td></tr>',
+        footerFormat: '</table>',
+        followPointer: true
+      },
+      legend: { enabled: false },
+      series: [{
+        type: 'bubble',
+        data: <%=raw @significant_commits.map { |commit| { x: commit.commited_at.to_i * 1000, y: commit.net_diff, z: commit.net_diff.abs, diff: commit.net_diff.to_s, subject: commit.subject, insertions: commit.insertions, deletions: commit.deletions, color: commit.net_diff.negative? ? "#FF0000" : "#00FF00", id: commit.id } }.to_json %>
+      }],
+    })
+  </script>
 
   <h2>Lines of code: Language distribution</h2>
   <div id="chart-implementation"></div>

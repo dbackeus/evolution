@@ -2,6 +2,7 @@ class Repository < ApplicationRecord
   belongs_to :account
   belongs_to :github_installation
 
+  has_many :commits, dependent: :delete_all
   has_many :repository_snapshots, dependent: :destroy
   has_many :code_files
 
@@ -9,7 +10,7 @@ class Repository < ApplicationRecord
   validates_presence_of :github_repository_id
   validates_inclusion_of :status, in: %w[pending importing imported]
 
-  after_commit :enqueue_import_job, on: :create
+  after_commit :enqueue_import_jobs, on: :create
   after_destroy :delete_code_files
 
   def repository_at_github
@@ -18,8 +19,9 @@ class Repository < ApplicationRecord
 
   private
 
-  def enqueue_import_job
+  def enqueue_import_jobs
     ImportRepositoryJob.perform_later(id)
+    ImportCommitsJob.perform_later(id)
   end
 
   def delete_code_files
