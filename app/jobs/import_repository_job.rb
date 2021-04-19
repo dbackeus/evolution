@@ -4,7 +4,7 @@ class ImportRepositoryJob < ApplicationJob
   def perform(repository_id)
     repository = Repository.find(repository_id)
 
-    repository_import_path = "#{Rails.root}/tmp/repository_imports/#{repository_id}"
+    repository_import_path = "#{Rails.root}/tmp/repository_imports/#{repository.id}"
     FileUtils.rm_rf repository_import_path # delete leftovers from potentially failed attempt
     FileUtils.mkdir_p repository_import_path
 
@@ -30,6 +30,7 @@ class ImportRepositoryJob < ApplicationJob
 
       current_commit_date = Time.at(`#{git_at_path} log -1 --format=%ct`.to_i).to_date
       tokei_output = `#{tokei} -e /vendor/ -e /tmp/ -e /node_modules/ --output json #{clone_path}`
+      tokei_output = tokei_output.gsub("#{clone_path}/", "") # remove clone path prefix from code file paths
 
       repository.repository_snapshots.create!(
         date: current_commit_date,
