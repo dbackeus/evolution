@@ -4,19 +4,39 @@ class RepositoriesController < ApplicationController
   def show
     @repository = current_account.repositories.find(params[:id])
 
-    if @repository.status == "imported"
-      latest_import = @repository.code_files.maximum(:date)
-      @current_loc = @repository.code_files.where(date: latest_import).sum(:code)
+    return unless @repository.status == "imported"
 
-      @significant_commits = Commit.most_significant(@repository.id)
-
+    if range = params[:range]
+      from, to = range.split("..").map(&Date.method(:parse))
+      @range = from..to
+      scope = @repository.code_files.where(date: @range)
+      range_distance_in_days = (to - from).to_i
+      @frequency =
+        case range_distance_in_days
+          when ..31 then "day"
+          when ..365 then "week"
+          else "month"
+        end
+    else
       @frequency = "month"
-      @language_distribution = @repository
-        .code_files
-        .group(:language, "toDate(date_trunc('#{@frequency}', date))")
-        .order("todate_date_trunc_#{@frequency}_date")
-        .sum(:code)
+      scope = @repository.code_files
     end
+
+    latest_import = @repository.code_files.maximum(:date)
+    @current_loc = @repository.code_files.where(date: latest_import).sum(:code)
+
+    @significant_commits = Commit.most_significant(@repository.id, @frequency, @range)
+
+    max_dates_per_frequency = scope
+      .group("date_trunc('#{@frequency}', date)")
+      .maximum(:date)
+      .values
+
+    @language_distribution = scope
+      .where(date: max_dates_per_frequency)
+      .group(:language, "toDate(date_trunc('#{@frequency}', date))")
+      .order("todate_date_trunc_#{@frequency}_date")
+      .sum(:code)
   end
 
   def index

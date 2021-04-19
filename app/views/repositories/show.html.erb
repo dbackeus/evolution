@@ -1,5 +1,13 @@
 <script src="/vendor/highcharts.min.js"></script>
 <script src="/vendor/highcharts-more.min.js"></script>
+<script>
+  var onZoom = (e) => {
+    let { min, max } = e.xAxis[0]
+    let startDate = new Date(min).toISOString()
+    var endDate = new Date(max).toISOString()
+    window.location = `${window.location.pathname}?range=${startDate}..${endDate}`
+  }
+</script>
 
 <h1><%= @repository.name %></h1>
 
@@ -9,6 +17,10 @@
   <p>Progress: <%= (import_progress(@repository) * 100).round %>%</p>
 <% end %>
 
+<% if @range %>
+  <p>Showing results between <%= @range.begin %> to <%= @range.end %>. <%= link_to "Reset", request.path %></p>
+<% end %>
+
 <% if @repository.status == "imported" %>
   <p>LOC: <%= @current_loc %></p>
 
@@ -16,7 +28,11 @@
   <div id="chart-commits"></div>
   <script>
     Highcharts.chart('chart-commits', {
-      chart: { type: 'bubble', zoomType: 'x' },
+      chart: {
+        type: 'bubble',
+        zoomType: 'x',
+        events: { selection: onZoom }
+      },
       title: { text: null },
       xAxis: { type: 'datetime' },
       yAxis: {
@@ -59,7 +75,8 @@
   <script>
     Highcharts.chart('chart-implementation', {
       chart: {
-        zoomType: 'x'
+        zoomType: 'x',
+        events: { selection: onZoom }
       },
       title: {
         text: null
