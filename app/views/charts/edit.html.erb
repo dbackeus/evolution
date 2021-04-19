@@ -8,13 +8,27 @@
   <%= f.text_field :name %>
   <br>
   <%= f.label :group_by, "Group By" %>
-  <%= f.select :group_by, { "Repositories" => "repository_id", "Language" => "language" } %>
+  <%=
+    f.select :group_by, {
+      "Repositories" => "repository_id",
+      "Language" => "language",
+      "Filters" => "filters",
+    }
+  %>
   <br>
   <%= f.label :repository_names, "Repositories" %>
   <%= f.select :repository_names, @repository_names, {}, multiple: true, size: @repository_names.length %>
   <br>
-  <%= f.label :repositories, "Filters" %>
+  <% if @filters.any? %>
+    <%= f.label :filter_ids, "Premade Filters" %>
+    <%= f.select :filter_ids, @filters, {}, multiple: true, size: @filters.length %>
+    <br>
+  <% end %>
+  <%= f.label :repositories, "Global Filter" %>
   <%= f.text_area :filters, cols: 80, rows: 10 %>
+  <br>
+  <%= f.label :start_date, "Start Date" %>
+  <%= f.text_field :start_date, placeholder: "YYYY-MM-DD" %>
   <br>
   <%= f.submit "Save", disable_with: 'Saving...' %>
 <% end %>

@@ -4,6 +4,7 @@ class Account < ApplicationRecord
   has_many :account_memberships, dependent: :delete_all
   has_many :charts, dependent: :delete_all
   has_many :code_files
+  has_many :filters, dependent: :delete_all
   has_many :github_installations, dependent: :delete_all
   has_many :repositories, dependent: :destroy
   has_many :users, through: :account_memberships

@@ -1,0 +1,20 @@
+<h1>Editing <%= @filter.name %></h1>
+
+<%= form_for @filter do |f| %>
+  <p><%= f.text_field :name, placeholder: "Name..." %></p>
+
+  <p><%= f.text_area :sql, placeholder: "match(path, '^\./(app|lib|client|src)/') AND NOT match(path, '\.spec\..{2,3}$')", cols: 80, rows: 10 %></p>
+
+  <%= f.submit "Update", disable_with: 'Updating...' %>
+<% end %>
+
+<h2>Example</h2>
+<table>
+  <tbody>
+    <% @example_code_files.each do |code_file| %>
+      <tr>
+        <td><%= code_file.path %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

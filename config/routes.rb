@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :charts
   resources :commits, only: :show
+  resources :filters
   resources :repositories
   resources :dashboards, only: :index
   resources :github_installations, only: %i[index show] do

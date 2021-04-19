@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_192643) do
+ActiveRecord::Schema.define(version: 2021_04_19_125715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2021_04_10_192643) do
     t.string "filters"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "filter_ids", default: [], null: false, array: true
+    t.date "start_date"
     t.index ["account_id"], name: "index_charts_on_account_id"
   end
 
@@ -55,6 +57,15 @@ ActiveRecord::Schema.define(version: 2021_04_10_192643) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["repository_id"], name: "index_commits_on_repository_id"
+  end
+
+  create_table "filters", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "name", null: false
+    t.text "sql", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_filters_on_account_id"
   end
 
   create_table "github_installations", force: :cascade do |t|
@@ -116,6 +127,7 @@ ActiveRecord::Schema.define(version: 2021_04_10_192643) do
   add_foreign_key "account_memberships", "users"
   add_foreign_key "charts", "accounts"
   add_foreign_key "commits", "repositories"
+  add_foreign_key "filters", "accounts"
   add_foreign_key "github_installations", "accounts"
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repositories", "github_installations"

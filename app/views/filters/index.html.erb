@@ -1,0 +1,9 @@
+<h1>Filters</h1>
+
+<ul>
+  <% @filters.each do |filter| %>
+    <li><%= link_to filter.name, edit_filter_path(filter) %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Create a new filter", new_filter_path %>
