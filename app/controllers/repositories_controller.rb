@@ -56,4 +56,12 @@ class RepositoriesController < ApplicationController
 
     redirect_to repository
   end
+
+  def destroy
+    repository = current_account.repositories.find(params[:id])
+
+    repository.destroy
+
+    redirect_to repositories_path
+  end
 end

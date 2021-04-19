@@ -2,7 +2,7 @@
 
 <ul>
   <% @repositories.each do |repository| %>
-    <li><%= link_to repository.name, repository %> - <%= repository.status %></li>
+    <li><%= link_to repository.name, repository %> - <%= link_to "Delete", repository, method: :delete, data: { confirm: "RLY delete #{repository.name}?" } %></li>
   <% end %>
 </ul>
 
