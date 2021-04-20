@@ -113,6 +113,8 @@ GEM
       ruby2_keywords
     faraday-net_http (1.0.1)
     ffi (1.15.0)
+    get_process_mem (0.2.7)
+      ffi (~> 1.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (4.1.0)
@@ -222,6 +224,9 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    sidekiq-worker-killer (1.0.0)
+      get_process_mem (~> 0.2.1)
+      sidekiq (>= 5)
     simdjson (1.0.1)
     spring (2.1.1)
     sprockets (4.0.2)
@@ -277,6 +282,7 @@ DEPENDENCIES
   rollbar
   selenium-webdriver
   sidekiq
+  sidekiq-worker-killer
   simdjson
   spring
   typhoeus

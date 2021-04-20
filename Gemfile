@@ -16,6 +16,7 @@ gem "redis"
 gem "reline" # speed up multiline pasting in console (https://github.com/ruby/irb/issues/43)
 gem "rollbar"
 gem "sidekiq"
+gem "sidekiq-worker-killer"
 gem "simdjson"
 gem "typhoeus"
 
