@@ -40,6 +40,8 @@ class ImportRepositoryJob < ApplicationJob
       )
 
       current_date = current_commit_date.prev_day
+
+      GC.start # Avoid memory bloat while importing
     end
 
     repository.update!(status: "imported")
