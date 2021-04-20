@@ -6,6 +6,6 @@ Sidekiq.configure_server do |config|
   end
 
   config.server_middleware do |chain|
-    chain.add Sidekiq::WorkerKiller, max_rss: ENV["SIDEKIQ_MAX_RSS"].to_i # 0 = disabled
+    chain.add Sidekiq::WorkerKiller, grace_time: 5, max_rss: ENV["SIDEKIQ_MAX_RSS"].to_i # 0 = disabled
   end
 end
