@@ -1,21 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  repository: one
+small_commit_one:
+  repository: small
   sha: MyString
-  title: MyString
+  subject: MyString
   files_changed: 1
   insertions: 1
   deletions: 1
   net_diff: 1
-  commited_at: 2021-04-10 21:26:43
+  commited_at: 2021-01-01 09:15:00
 
-two:
-  repository: two
+small_commit_two:
+  repository: small
   sha: MyString
-  title: MyString
+  subject: MyString
   files_changed: 1
   insertions: 1
   deletions: 1
   net_diff: 1
-  commited_at: 2021-04-10 21:26:43
+  commited_at: 2021-01-02 21:30:00

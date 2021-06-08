@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  repository_snapshot: one
-  output: MyText
+small_commit_one:
+  repository_snapshot: small_commit_one
+  output: "{\"Bash\":{\"blanks\":19,\"code\":43,\"comments\":6,\"reports\":[{\"stats\":{\"blanks\":0,\"code\":0,\"comments\":1,\"blobs\":{}},\"name\":\"./bin/semaphoreci/after-job\"},{\"stats\":{\"blanks\":2,\"code\":2,\"comments\":1,\"blobs\":{}},\"name\":\"./bin/semaphoreci/job-1\"},{\"stats\":{\"blanks\":4,\"code\":6,\"comments\":2,\"blobs\":{}},\"name\":\"./bin/semaphoreci/setup\"},{\"stats\":{\"blanks\":7,\"code\":18,\"comments\":1,\"blobs\":{}},\"name\":\"./bin/update\"},{\"stats\":{\"blanks\":6,\"code\":17,\"comments\":1,\"blobs\":{}},\"name\":\"./bin/setup\"}],\"children\":{},\"inaccurate\":false},\"Markdown\":{\"blanks\":8,\"code\":0,\"comments\":9,\"reports\":[{\"stats\":{\"blanks\":8,\"code\":0,\"comments\":9,\"blobs\":{}},\"name\":\"./README.md\"}],\"children\":{},\"inaccurate\":false},\"Ruby\":{\"blanks\":24,\"code\":70,\"comments\":48,\"reports\":[{\"stats\":{\"blanks\":12,\"code\":21,\"comments\":42,\"blobs\":{}},\"name\":\"./spec/spec_helper.rb\"},{\"stats\":{\"blanks\":6,\"code\":19,\"comments\":0,\"blobs\":{}},\"name\":\"./app.rb\"},{\"stats\":{\"blanks\":6,\"code\":30,\"comments\":6,\"blobs\":{}},\"name\":\"./spec/app_spec.rb\"}],\"children\":{},\"inaccurate\":false}}"
 
-two:
-  repository_snapshot: two
-  output: MyText
+small_commit_two:
+  repository_snapshot: small_commit_two
+  output: "{\"Bash\":{\"blanks\":19,\"code\":43,\"comments\":6,\"reports\":[{\"stats\":{\"blanks\":4,\"code\":6,\"comments\":2,\"blobs\":{}},\"name\":\"./bin/semaphoreci/setup\"},{\"stats\":{\"blanks\":6,\"code\":17,\"comments\":1,\"blobs\":{}},\"name\":\"./bin/setup\"},{\"stats\":{\"blanks\":0,\"code\":0,\"comments\":1,\"blobs\":{}},\"name\":\"./bin/semaphoreci/after-job\"},{\"stats\":{\"blanks\":7,\"code\":18,\"comments\":1,\"blobs\":{}},\"name\":\"./bin/update\"},{\"stats\":{\"blanks\":2,\"code\":2,\"comments\":1,\"blobs\":{}},\"name\":\"./bin/semaphoreci/job-1\"}],\"children\":{},\"inaccurate\":false},\"Markdown\":{\"blanks\":8,\"code\":0,\"comments\":9,\"reports\":[{\"stats\":{\"blanks\":8,\"code\":0,\"comments\":9,\"blobs\":{}},\"name\":\"./README.md\"}],\"children\":{},\"inaccurate\":false},\"Ruby\":{\"blanks\":24,\"code\":70,\"comments\":48,\"reports\":[{\"stats\":{\"blanks\":6,\"code\":30,\"comments\":6,\"blobs\":{}},\"name\":\"./spec/app_spec.rb\"},{\"stats\":{\"blanks\":6,\"code\":19,\"comments\":0,\"blobs\":{}},\"name\":\"./app.rb\"},{\"stats\":{\"blanks\":12,\"code\":21,\"comments\":42,\"blobs\":{}},\"name\":\"./spec/spec_helper.rb\"}],\"children\":{},\"inaccurate\":false}}"
