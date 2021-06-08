@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_125715) do
+ActiveRecord::Schema.define(version: 2021_06_08_151207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,6 @@ ActiveRecord::Schema.define(version: 2021_04_19_125715) do
   add_foreign_key "github_installations", "accounts"
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repositories", "github_installations"
-  add_foreign_key "repository_snapshot_tokei_dumps", "repository_snapshots"
-  add_foreign_key "repository_snapshots", "repositories"
+  add_foreign_key "repository_snapshot_tokei_dumps", "repository_snapshots", on_delete: :cascade
+  add_foreign_key "repository_snapshots", "repositories", on_delete: :cascade
 end

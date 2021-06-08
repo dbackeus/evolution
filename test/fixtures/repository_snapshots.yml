@@ -1,11 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  repository: one
-  date: 2021-04-01
-  status: MyString
+small_commit_one:
+  repository: small
+  date: 2021-01-01
 
-two:
-  repository: two
-  date: 2021-04-01
-  status: MyString
+small_commit_two:
+  repository: small
+  date: 2021-01-02

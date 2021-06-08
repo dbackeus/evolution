@@ -3,7 +3,7 @@ class Repository < ApplicationRecord
   belongs_to :github_installation
 
   has_many :commits, dependent: :delete_all
-  has_many :repository_snapshots, dependent: :destroy
+  has_many :repository_snapshots # dependent: delete_all via foreign key
   has_many :code_files
 
   validates_presence_of :name

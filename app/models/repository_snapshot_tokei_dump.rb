@@ -1,3 +1,6 @@
+# Note: don't rely on destroy callbacks since model entries are deleted via
+# foreign key delete cascade
+
 class RepositorySnapshotTokeiDump < ApplicationRecord
   belongs_to :repository_snapshot
 
