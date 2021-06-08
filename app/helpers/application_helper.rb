@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def buildless_module(name)
+    url = BuildlessCache.modules[name]
+
+    raise "module '#{name}' not found" unless url
+
+    %(<script type="module-shim" src="#{url}"></script>).html_safe
+  end
+
   COLORS = %w[
     #003f5c
     #2f4b7c
