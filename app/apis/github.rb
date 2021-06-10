@@ -62,6 +62,11 @@ class Github
     end
   end
 
+  # https://docs.github.com/en/rest/reference/repos#get-a-repository
+  def repository(repository_id)
+    get("repositories/#{repository_id}")
+  end
+
   private
 
   def request(method, path, params)

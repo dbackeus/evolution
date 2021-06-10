@@ -46,7 +46,7 @@ class RepositoriesController < ApplicationController
   def create
     github_installation = current_account.github_installations.find(params[:github_installation_id])
 
-    repository_response = Github.as_installation(github_installation).get("repositories/#{params[:github_repository_id]}")
+    repository_response = Github.as_installation(github_installation).repository(params[:github_repository_id])
 
     repository = current_account.repositories.create!(
       github_installation: github_installation,

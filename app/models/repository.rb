@@ -14,7 +14,7 @@ class Repository < ApplicationRecord
   after_destroy :delete_code_files
 
   def repository_at_github
-    @repository_at_github ||= Github.as_installation(github_installation).get("repositories/#{github_repository_id}")
+    @repository_at_github ||= Github.as_installation(github_installation).repository(github_repository_id)
   end
 
   private
