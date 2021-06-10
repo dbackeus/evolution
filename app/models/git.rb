@@ -1,4 +1,8 @@
 class Git
+  def self.tmp_dir
+    ENV["GIT_TMP_DIR"] || "#{Rails.root}/tmp"
+  end
+
   def self.clone_repository(repository, tmp_dir)
     Git.new(repository, tmp_dir).clone do |git|
       yield git
@@ -10,9 +14,9 @@ class Git
   attr_reader :clone_path
   attr_reader :git_at_path
 
-  def initialize(repository, tmp_dir)
+  def initialize(repository, tmp_subdir)
     @repository = repository
-    @repository_import_path = "#{Rails.root}/tmp/#{tmp_dir}/#{repository.id}"
+    @repository_import_path = "#{Git.tmp_dir}/#{tmp_subdir}/#{repository.id}"
     @clone_path = "#{repository_import_path}/clone"
     @git_at_path = "git -C #{clone_path}"
   end

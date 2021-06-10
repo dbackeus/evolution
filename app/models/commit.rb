@@ -1,3 +1,6 @@
+# Note that repository commits are being completely replaced every time a repository
+# syncs new changes so avoid persisting references to specific commits based on id.
+
 class Commit < ApplicationRecord
   belongs_to :repository
 

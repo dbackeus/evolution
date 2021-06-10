@@ -37,7 +37,10 @@ class ImportCommitsJob < ApplicationJob
         end
       end
 
-      Commit.insert_all(commit_attributes)
+      Commit.transaction do
+        @repository.commits.delete_all
+        Commit.insert_all(commit_attributes)
+      end
     end
   end
 
