@@ -3,4 +3,6 @@
 main:
   account: main
   name: main
-  installation_id: 1337 # the id at Github
+  # The installation id at Github, actually exists via the integration test
+  # app with access to eg. the continuous-evolution-test repository.
+  installation_id: 17520005

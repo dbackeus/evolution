@@ -8,13 +8,13 @@ class Repository < ApplicationRecord
 
   validates_presence_of :name
   validates_presence_of :github_repository_id
-  validates_inclusion_of :status, in: %w[pending importing imported]
+  validates_inclusion_of :status, in: %w[pending importing imported syncing]
 
   after_commit :enqueue_import_jobs, on: :create
   after_destroy :delete_code_files
 
   def repository_at_github
-    @repository_at_github ||= Github.as_installation(github_installation).get("repositories/#{github_repository_id}")
+    @repository_at_github ||= Github.as_installation(github_installation).repository(github_repository_id)
   end
 
   private

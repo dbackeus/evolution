@@ -9,5 +9,8 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  def setup
+    # Clickhouse doesn't support transactional test wrapping so manually truncating data instead
+    CodeFile.connection.truncate("code_files")
+  end
 end
