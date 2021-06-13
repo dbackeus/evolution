@@ -222,6 +222,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rollbar (2.24.0)
+    rorvswild (1.5.12)
     ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
     rufus-scheduler (3.7.0)
@@ -299,6 +300,7 @@ DEPENDENCIES
   redis
   reline
   rollbar
+  rorvswild
   selenium-webdriver
   sidekiq
   sidekiq-scheduler

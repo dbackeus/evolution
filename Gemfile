@@ -15,6 +15,7 @@ gem "rails"
 gem "redis"
 gem "reline" # speed up multiline pasting in console (https://github.com/ruby/irb/issues/43)
 gem "rollbar"
+gem "rorvswild" # APM (https://www.rorvswild.com/)
 gem "sidekiq"
 gem "sidekiq-worker-killer"
 gem "sidekiq-scheduler"
